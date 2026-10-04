@@ -48,9 +48,6 @@ export default function WorkPage() {
     <main className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
       {/* 1. Header & Summary Stats */}
       <section className="text-center space-y-4 max-w-3xl mx-auto">
-        <Badge color="info" className="w-fit mx-auto rounded-full px-3.5 py-1">
-          Engineering Showcase
-        </Badge>
         <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900 dark:text-white">
           Projects, Real Usage & In-Progress Builds
         </h1>

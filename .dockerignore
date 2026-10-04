@@ -1,0 +1,49 @@
+# Version control & internal tools
+.git
+.gitignore
+.gitattributes
+.agents
+.gemini
+
+# Dependencies & Package Managers
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+pnpm-debug.log*
+.pnp
+.pnp.js
+
+# Next.js & Build Artifacts
+.next/
+out/
+build/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Environment variables & secrets (inject via runtime/compose)
+.env
+.env*.local
+.env.development
+.env.test
+.env.production
+*.pem
+*.key
+*.cert
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# IDEs & Editor configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Markdown & Documentation
+README.md
+docs/

@@ -86,13 +86,6 @@ export default function HomePage() {
       <section className="flex flex-col items-center text-center space-y-6 pt-4">
         {/* Availability Badge */}
         <div className="inline-flex items-center gap-2">
-          <Badge color="success" size="sm" className="rounded-full px-3.5 py-1 font-medium shadow-xs">
-            <span className="relative flex h-2 w-2 mr-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            Available for Full-Stack Roles & High-Impact Builds
-          </Badge>
         </div>
 
         {/* Main Headline */}
@@ -211,19 +204,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. Marquee Tech Stack */}
-      <section className="pt-2 pb-6 border-y border-gray-200 dark:border-gray-800">
-        <p className="text-center text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">
-          Technologies Powering Production Builds
-        </p>
-        <Marquee pauseOnHover repeat={4} className="[--duration:35s]">
-          {TECH_STACK.map((tech) => (
-            <Badge key={tech} color="gray" size="sm" className="px-4 py-1.5 rounded-full text-xs font-medium">
-              {tech}
-            </Badge>
-          ))}
-        </Marquee>
-      </section>
+
 
       {/* 3. Main Flagship Projects (With Live Metrics) */}
       <section className="space-y-8">
@@ -233,7 +214,7 @@ export default function HomePage() {
               <Badge color="success" className="rounded-full px-3 py-0.5">
                 Flagship Systems
               </Badge>
-              <span className="text-xs text-gray-500 dark:text-gray-400">Live in Production</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 rounded">Live in Production</span>
             </div>
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
               Primary Projects & Real-World Usage
@@ -263,10 +244,10 @@ export default function HomePage() {
                     className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
                   />
                   <div className="absolute top-3 left-3 flex items-center gap-2">
-                    <Badge color="success" size="xs" className="font-semibold uppercase tracking-wider backdrop-blur-md">
+                    <Badge color="success" size="xs" className="font-semibold uppercase tracking-wider backdrop-blur-md rounded-full">
                       ● {project.status}
                     </Badge>
-                    <Badge color="dark" size="xs">
+                    <Badge color="dark" size="xs" className="rounded-full">
                       {project.category}
                     </Badge>
                   </div>
@@ -347,9 +328,9 @@ export default function HomePage() {
       {/* 4. Active In-Progress Builds (Major & Minor) */}
       <section className="space-y-6 pt-4">
         <div className="space-y-1">
-          <Badge color="warning" className="rounded-full px-3 py-0.5">
+          {/*<Badge color="warning" className="rounded-full px-3 py-0.5">
             Active Roadmap
-          </Badge>
+          </Badge>*/}
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
             Ongoing Builds & Experimental Labs
           </h2>
@@ -423,46 +404,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      {/* 5. What I Do (Full-Stack Pillars) */}
-      <section className="space-y-8 pt-4">
-        <div className="text-center space-y-2 max-w-2xl mx-auto">
-          <Badge color="info" className="w-fit mx-auto rounded-full px-3 py-1">
-            Core Competencies
-          </Badge>
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-            Engineering Scope & Capabilities
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-            End-to-end software development from intuitive reactive frontends to high-concurrency microservices.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {SKILL_PILLARS.map(({ icon: Icon, badge, title, description, skills }) => (
-            <Card key={title} className="hover:shadow-lg transition-shadow duration-300">
-              <div className="flex items-center justify-between mb-2">
-                <div className="p-3 rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400">
-                  <Icon className="size-6" />
-                </div>
-                <Badge color="purple" size="xs">
-                  {badge}
-                </Badge>
-              </div>
-              <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h3>
-              <p className="text-sm font-normal text-gray-600 dark:text-gray-400 leading-relaxed">{description}</p>
-              <div className="flex flex-wrap gap-1.5 pt-2">
-                {skills.map((s) => (
-                  <Badge key={s} color="gray" size="xs">
-                    {s}
-                  </Badge>
-                ))}
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* 6. Call to Action Banner */}
       <section className="rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 p-8 sm:p-14 text-center text-white space-y-6 shadow-xl">
         <div className="space-y-3 max-w-2xl mx-auto">
