@@ -2,8 +2,8 @@ import HomePage from "./home/page";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <HomePage/>
+    <div className="w-full min-h-screen bg-zinc-50/60 dark:bg-black font-sans transition-colors duration-200">
+      <HomePage />
     </div>
   );
 }

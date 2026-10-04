@@ -49,14 +49,21 @@ const ContactForm = () => {
     setFormData((prev) => ({ ...prev, terms: checked }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!formData.firstName || !formData.email || !formData.message) {
+      setStatus("error");
+      setFeedbackMessage("Please fill in all required fields.");
+      return;
+    }
 
     if (!formData.terms) {
       setStatus("error");
       setFeedbackMessage("Please accept the terms and conditions.");
       return;
     }
+
     setIsSubmitting(true);
     setStatus("idle");
     setFeedbackMessage("");
@@ -85,11 +92,13 @@ const ContactForm = () => {
         message: "",
         terms: false,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       setStatus("error");
-      setFeedbackMessage(
-        error.message || "Failed to send message. Please try again."
-      );
+      const errorMsg =
+        error instanceof Error
+          ? error.message
+          : "Failed to send message. Please try again.";
+      setFeedbackMessage(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
@@ -203,8 +212,7 @@ const ContactForm = () => {
               </div>
 
               {/* status banners */}
-              {status === "success" && (
-                <div className="flex items-center gap-2 p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-300 text-sm animate-in fade-in">
+              {status === "success" && (<div className="flex items-center gap-2 p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-300 text-sm animate-in fade-in">
                   <CheckCircle2 className="size-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   <span>{feedbackMessage}</span>
                 </div>

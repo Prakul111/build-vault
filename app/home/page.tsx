@@ -2,76 +2,34 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Button, Badge, Card, Progress } from "flowbite-react";
+import { Badge, Button, Progress } from "flowbite-react";
 import { Marquee } from "@/components/shadcn-space/animations/marquee";
 import {
   ArrowRight,
-  Code2,
-  Database,
+  CheckCircle2,
   ExternalLink,
-  Flame,
-  GitBranch,
-  Layers,
   Lightbulb,
   Mail,
-  Server,
-  Shield,
   Sparkles,
-  Users,
-  Zap,
+  Terminal,
 } from "lucide-react";
 import { GithubIcon } from "@/components/icons/github-icon";
+import { Separator } from "@/components/ui/separator";
 import { PROJECTS_DATA, PORTFOLIO_METRICS_SUMMARY } from "@/data/projects";
 
-// Hoisted static arrays to module scope (Vercel Best Practice: server-hoist-static-io)
 const TECH_STACK = [
-  "Next.js 16",
+  "Next.js 16 (Turbopack)",
   "React 19",
   "TypeScript",
   "Tailwind CSS v4",
-  "Node.js",
+  "Node.js 26",
   "Docker",
   "PostgreSQL",
   "Redis Streams",
   "Flowbite React",
-  "Resend",
+  "Resend API",
   "Web Crypto API",
   "GitHub Actions",
-];
-
-const SKILL_PILLARS = [
-  {
-    icon: Code2,
-    badge: "Frontend",
-    title: "Responsive & Modern UIs",
-    description:
-      "Crafting sleek, accessible, and fast web experiences using Next.js App Router, React 19, Tailwind CSS, and Flowbite React with native dark-mode support.",
-    skills: ["React 19", "Next.js", "TypeScript", "Tailwind CSS", "Flowbite UI"],
-  },
-  {
-    icon: Server,
-    badge: "Backend",
-    title: "Robust APIs & Server Actions",
-    description:
-      "Architecting reliable backend services, server actions, REST APIs, and microservices with secure authentication, rate limiting, and email dispatch pipelines.",
-    skills: ["Node.js", "Server Actions", "REST APIs", "Resend", "OAuth/JWT"],
-  },
-  {
-    icon: Database,
-    badge: "Database",
-    title: "Data Modeling & Storage",
-    description:
-      "Designing structured relational schemas, indexing, and high-speed caching layers using PostgreSQL and Redis to guarantee sub-second queries.",
-    skills: ["PostgreSQL", "Redis", "Prisma / Drizzle", "ACID Compliance"],
-  },
-  {
-    icon: Layers,
-    badge: "DevOps",
-    title: "Docker & Cloud Automation",
-    description:
-      "Writing optimized multi-stage Docker builds and setting up automated CI/CD pipelines with GitHub Actions for hands-off production deployments.",
-    skills: ["Docker", "GitHub Actions", "Vercel", "Linux", "CI/CD"],
-  },
 ];
 
 export default function HomePage() {
@@ -81,349 +39,404 @@ export default function HomePage() {
   );
 
   return (
-    <div className="w-full space-y-20 py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* 1. Hero Section */}
-      <section className="flex flex-col items-center text-center space-y-6 pt-4">
-        {/* Availability Badge */}
-        <div className="inline-flex items-center gap-2">
-        </div>
+    <div className="w-full bg-zinc-50/60 dark:bg-black font-sans transition-colors duration-200">
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 space-y-16 sm:space-y-20">
+        {/* 1. Hero Section */}
+        <section className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700">
+          {/* Availability Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-zinc-200/80 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/60 shadow-xs backdrop-blur-xs max-w-full">
+            <span className="flex size-2 rounded-full bg-teal-500 dark:bg-teal-400 shrink-0"></span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-300 truncate">
+              Available for Select Opportunities &amp; Projects
+            </span>
+          </div>
 
-        {/* Main Headline */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white max-w-4xl leading-[1.1]">
-          Building software used by real people, engineered to scale.
-        </h1>
+          {/* Main Headline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-[1.15]">
+            Building software used by real people,{" "}
+            <span className="text-blue-600 dark:text-blue-400">engineered to scale</span>.
+          </h1>
 
-        <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-normal leading-relaxed">
-          Hi, I&apos;m <span className="font-semibold text-gray-900 dark:text-white">Prakul Tripathi</span> — Full-Stack Developer specializing in React 19, Next.js 16, Cloud Architectures, and high-performance microservices.
-        </p>
+          <p className="text-base sm:text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto font-normal leading-relaxed">
+            Hi, I&apos;m <strong className="text-zinc-900 dark:text-zinc-100 font-semibold">Prakul Tripathi</strong> — Full-Stack Developer specializing in React 19, Next.js 16, Cloud Architectures, and high-performance microservices.
+          </p>
 
-        {/* Action Buttons using Flowbite */}
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-          <Button as={Link} href="/work" color="blue" pill size="lg" className="font-medium shadow-md">
-            View Live Projects & Metrics <ArrowRight className="ml-2 size-4" />
-          </Button>
-          <Button as={Link} href="/contact" color="gray" pill size="lg" className="font-medium">
-            <Mail className="mr-2 size-4" /> Get In Touch
-          </Button>
-        </div>
-
-        {/* Live Ecosystem Metrics Ribbon */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl pt-6">
-          <div className="p-4 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200/80 dark:border-gray-800 shadow-sm text-center">
-            <div className="flex items-center justify-center gap-1.5 text-blue-600 dark:text-blue-400 mb-1">
-              <Users className="size-4" />
-              <span className="text-2xl font-black text-gray-900 dark:text-white">
-                {PORTFOLIO_METRICS_SUMMARY.totalActiveUsers}
-              </span>
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
+            <Button as={Link} href="/work" color="blue" pill size="lg" className="font-medium shadow-sm justify-center">
+              View Live Projects &amp; Metrics <ArrowRight className="ml-2 size-4" />
+            </Button>
+            <div className="flex items-center justify-center gap-3">
+              <Button as={Link} href="/contact" color="gray" pill size="lg" className="flex-1 sm:flex-initial font-medium justify-center">
+                <Mail className="mr-2 size-4" /> Start Conversation
+              </Button>
+              <Button
+                as="a"
+                href="https://github.com/prakul"
+                target="_blank"
+                rel="noopener noreferrer"
+                color="gray"
+                pill
+                size="lg"
+                className="font-medium justify-center"
+              >
+                <GithubIcon className="mr-2 size-4" /> GitHub
+              </Button>
             </div>
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-              Active Users & Clients
+          </div>
+        </section>
+
+        {/* 2. Key Metrics Strip (Responsive grid & typography) */}
+        <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto w-full">
+          <div className="p-4 sm:p-5 rounded-2xl border border-zinc-200/80 bg-white/90 dark:border-zinc-800/80 dark:bg-zinc-900/50 shadow-xs text-center flex flex-col justify-center">
+            <div className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white mb-1">
+              {PORTFOLIO_METRICS_SUMMARY.totalActiveUsers}
+            </div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+              Active Users
+            </div>
+            <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+              Across production apps
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200/80 dark:border-gray-800 shadow-sm text-center">
-            <div className="flex items-center justify-center gap-1.5 text-emerald-600 dark:text-emerald-400 mb-1">
-              <Zap className="size-4" />
-              <span className="text-2xl font-black text-gray-900 dark:text-white">
-                {PORTFOLIO_METRICS_SUMMARY.productionUptime}
-              </span>
+          <div className="p-4 sm:p-5 rounded-2xl border border-zinc-200/80 bg-white/90 dark:border-zinc-800/80 dark:bg-zinc-900/50 shadow-xs text-center flex flex-col justify-center">
+            <div className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white mb-1">
+              {PORTFOLIO_METRICS_SUMMARY.productionUptime}
             </div>
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-              Production Availability
+            <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+              Production Uptime
+            </div>
+            <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+              High availability SLA
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200/80 dark:border-gray-800 shadow-sm text-center">
-            <div className="flex items-center justify-center gap-1.5 text-purple-600 dark:text-purple-400 mb-1">
-              <Layers className="size-4" />
-              <span className="text-2xl font-black text-gray-900 dark:text-white">
-                {PORTFOLIO_METRICS_SUMMARY.projectsShipped}
-              </span>
+          <div className="p-4 sm:p-5 rounded-2xl border border-zinc-200/80 bg-white/90 dark:border-zinc-800/80 dark:bg-zinc-900/50 shadow-xs text-center flex flex-col justify-center">
+            <div className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white mb-1">
+              {PORTFOLIO_METRICS_SUMMARY.projectsShipped}
             </div>
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-              Shipped Systems & Tools
+            <div className="text-xs font-semibold uppercase tracking-wider text-purple-600 dark:text-purple-400">
+              Shipped Systems
+            </div>
+            <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+              Full-stack &amp; open source
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200/80 dark:border-gray-800 shadow-sm text-center">
-            <div className="flex items-center justify-center gap-1.5 text-amber-600 dark:text-amber-400 mb-1">
-              <GitBranch className="size-4" />
-              <span className="text-2xl font-black text-gray-900 dark:text-white">
-                {PORTFOLIO_METRICS_SUMMARY.githubContributions}
-              </span>
+          <div className="p-4 sm:p-5 rounded-2xl border border-zinc-200/80 bg-white/90 dark:border-zinc-800/80 dark:bg-zinc-900/50 shadow-xs text-center flex flex-col justify-center">
+            <div className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white mb-1">
+              {PORTFOLIO_METRICS_SUMMARY.githubContributions}
             </div>
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+            <div className="text-xs font-semibold uppercase tracking-wider text-amber-600 dark:text-amber-400">
               Git Contributions
+            </div>
+            <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+              Commits &amp; code reviews
             </p>
           </div>
-        </div>
+        </section>
 
-        {/* Developer Snapshot Box */}
-        <div className="w-full max-w-3xl pt-2 text-left">
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50/80 dark:bg-gray-900/80 backdrop-blur-md shadow-xl overflow-hidden">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-800 bg-gray-100/70 dark:bg-gray-800/50">
-              <div className="flex items-center gap-2">
-                <div className="size-3 rounded-full bg-red-500/80" />
-                <div className="size-3 rounded-full bg-yellow-500/80" />
-                <div className="size-3 rounded-full bg-green-500/80" />
-              </div>
-              <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">
-                prakul@buildvault: ~ / live-systems.json
-              </span>
-              <div className="size-3" />
+        <Separator className="bg-zinc-200/80 dark:bg-zinc-800/80 max-w-5xl mx-auto" />
+
+        {/* 3. The Story & Live Systems Snapshot (Matches About Page) */}
+        <section className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-5">
+            <Badge color="info" className="w-fit">
+              Live Architecture
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+              Full-stack systems built for real-world reliability.
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Every application I design focuses on strict data boundaries, sub-second response times,
+              and predictable error handling. From ephemeral encrypted file transfers to automated worker dispatchers,
+              systems are built to run autonomously in production.
+            </p>
+            <div className="space-y-2 pt-1">
+              {[
+                "React 19 & Next.js 16 Server Components with Turbopack",
+                "Client-side AES-GCM 256-bit zero-knowledge encryption",
+                "Multi-stage Docker containers verified with GitHub Actions CI",
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start sm:items-center gap-2.5 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300">
+                  <CheckCircle2 className="size-4 text-teal-500 shrink-0 mt-0.5 sm:mt-0" />
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
-            <div className="p-5 font-mono text-xs sm:text-sm overflow-x-auto space-y-1.5 leading-relaxed text-gray-600 dark:text-gray-300">
-              <p>
-                <span className="text-blue-600 dark:text-blue-400 font-semibold">const</span>{" "}
-                <span className="text-gray-900 dark:text-white font-semibold">developer</span> = &#123;
-              </p>
-              <p className="pl-4">
-                <span>name:</span>{" "}
-                <span className="text-green-600 dark:text-green-400">&quot;Prakul Tripathi&quot;</span>,
-              </p>
-              <p className="pl-4">
-                <span>role:</span>{" "}
-                <span className="text-green-600 dark:text-green-400">&quot;Full-Stack Software Engineer&quot;</span>,
-              </p>
-              <p className="pl-4">
-                <span>liveUsersServing:</span>{" "}
-                <span className="text-sky-600 dark:text-sky-400">&quot;3,800+ total active accounts & transfers&quot;</span>,
-              </p>
-              <p className="pl-4">
-                <span>activePipelines:</span> [
-                <span className="text-amber-600 dark:text-amber-400">&quot;TaskFlow Dispatcher (Alpha)&quot;</span>,{" "}
-                <span className="text-amber-600 dark:text-amber-400">&quot;Cloud Sentinel Daemon&quot;</span>],
-              </p>
-              <p className="pl-4">
-                <span>corePhilosophy:</span>{" "}
-                <span className="text-purple-600 dark:text-purple-400">&quot;Resilient architectures, zero fluff, clean code&quot;</span>
-              </p>
-              <p>&#125;;</p>
+            <div className="pt-2">
+              <Button as={Link} href="/work" color="gray" pill size="sm" className="font-medium w-full sm:w-auto justify-center">
+                Explore Shipped Architectures <ArrowRight className="ml-2 size-3.5" />
+              </Button>
             </div>
           </div>
-        </div>
-      </section>
 
+          <div className="lg:col-span-6 w-full min-w-0">
+            <div className="p-4 sm:p-6 rounded-3xl border border-zinc-200/80 bg-white dark:border-zinc-800/80 dark:bg-zinc-900/60 shadow-sm relative overflow-hidden">
+              <div className="flex items-center gap-2 mb-3 sm:mb-4 border-b border-zinc-100 dark:border-zinc-800/80 pb-3">
+                <Terminal className="size-4 text-blue-500 shrink-0" />
+                <span className="text-[11px] sm:text-xs font-mono text-zinc-500 dark:text-zinc-400 truncate">
+                  prakul@buildvault: ~ / live-systems.json
+                </span>
+              </div>
+              <pre className="text-[11px] sm:text-xs font-mono text-zinc-800 dark:text-zinc-200 overflow-x-auto leading-relaxed">
+{`{\n  "engineer": "Prakul Tripathi",\n  "role": "Full-Stack Software Engineer",\n  "nodeVersion": "Node.js v26.10.0 (Latest)",\n  "activeUsers": "3,800+ total accounts & transfers",\n  "pipelines": [\n    "dumpher-store (Live AES-GCM)",\n    "TaskFlow Dispatcher (Alpha)",\n    "Cloud Sentinel Daemon"\n  ],\n  "corePhilosophy": "Resilient architectures, zero fluff, clean code"\n}`}
+              </pre>
+            </div>
+          </div>
+        </section>
 
+        {/* 4. Tech Stack Marquee Ribbon (Responsive edge gradients) */}
+        <section className="max-w-5xl mx-auto py-2 w-full">
+          <div className="relative overflow-hidden py-3">
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 md:w-20 bg-gradient-to-r from-zinc-50/90 dark:from-black to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 md:w-20 bg-gradient-to-l from-zinc-50/90 dark:from-black to-transparent z-10" />
+            <Marquee className="[--duration:28s] gap-4 sm:gap-6">
+              {TECH_STACK.map((tech) => (
+                <span
+                  key={tech}
+                  className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-200/80 bg-white/90 dark:border-zinc-800 dark:bg-zinc-900/60 text-xs font-semibold text-zinc-700 dark:text-zinc-300 shadow-xs whitespace-nowrap"
+                >
+                  <span className="size-1.5 rounded-full bg-blue-500 dark:bg-blue-400 shrink-0"></span>
+                  {tech}
+                </span>
+              ))}
+            </Marquee>
+          </div>
+        </section>
 
-      {/* 3. Main Flagship Projects (With Live Metrics) */}
-      <section className="space-y-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <Badge color="success" className="rounded-full px-3 py-0.5">
+        <Separator className="bg-zinc-200/80 dark:bg-zinc-800/80 max-w-5xl mx-auto" />
+
+        {/* 5. Flagship Production Projects */}
+        <section className="max-w-5xl mx-auto space-y-8 w-full">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+            <div className="space-y-2">
+              <Badge color="success" className="w-fit">
                 Flagship Systems
               </Badge>
-              <span className="text-xs text-gray-500 dark:text-gray-400 rounded">Live in Production</span>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                Primary Projects &amp; Real-World Usage
+              </h2>
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base max-w-xl leading-relaxed">
+                Battle-tested applications currently active, handling user requests, cryptographic operations, and real data flows.
+              </p>
             </div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-              Primary Projects & Real-World Usage
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base max-w-xl">
-              Battle-tested applications currently active, handling user requests and real data flows.
-            </p>
+            <Button as={Link} href="/work" color="gray" size="sm" pill className="font-medium shrink-0 w-full sm:w-auto justify-center">
+              View All Projects <ArrowRight className="ml-2 size-3.5" />
+            </Button>
           </div>
-          <Button as={Link} href="/work" color="light" size="sm" pill>
-            View all project details <ArrowRight className="ml-2 size-4" />
-          </Button>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {flagshipProjects.map((project) => (
-            <Card
-              key={project.id}
-              className="overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-800 flex flex-col justify-between"
-              renderImage={() => (
-                <div className="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            {flagshipProjects.map((project) => (
+              <div
+                key={project.id}
+                className="rounded-3xl border border-zinc-200/80 bg-white/90 dark:border-zinc-800/80 dark:bg-zinc-900/50 shadow-xs hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+              >
+                {/* Image Banner */}
+                <div className="relative aspect-video w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                   <Image
                     src={project.imageSrc}
                     alt={project.title}
                     width={800}
                     height={450}
                     unoptimized
-                    className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
+                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute top-3 left-3 flex items-center gap-2">
-                    <Badge color="success" size="xs" className="font-semibold uppercase tracking-wider backdrop-blur-md rounded-full">
-                      ● {project.status}
-                    </Badge>
-                    <Badge color="dark" size="xs" className="rounded-full">
+                  <div className="absolute top-3 left-3 flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold uppercase tracking-wider bg-black/75 text-emerald-400 backdrop-blur-md border border-white/10">
+                      <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                      {project.status}
+                    </span>
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-medium bg-black/75 text-zinc-200 backdrop-blur-md border border-white/10">
                       {project.category}
-                    </Badge>
+                    </span>
                   </div>
                 </div>
-              )}
-            >
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-2xl font-black tracking-tight text-gray-900 dark:text-white">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mt-0.5">
-                    {project.tagline}
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
 
-                {/* Live Usage Stat Blocks */}
-                {project.metrics && (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 p-3 rounded-xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200/80 dark:border-gray-700/60">
+                {/* Card Body */}
+                <div className="p-4 sm:p-6 space-y-4 flex-1 flex flex-col justify-between">
+                  <div className="space-y-4">
                     <div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Usage / Reach</p>
-                      <p className="text-base font-bold text-gray-900 dark:text-white">{project.metrics.activeUsers}</p>
-                      <p className="text-[10px] text-gray-500 dark:text-gray-400 truncate">{project.metrics.usersLabel}</p>
+                      <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm font-semibold text-blue-600 dark:text-blue-400 mt-0.5">
+                        {project.tagline}
+                      </p>
+                      <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+                        {project.description}
+                      </p>
                     </div>
-                    {project.metrics.extraMetric && (
-                      <div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">{project.metrics.extraMetric.label}</p>
-                        <p className="text-base font-bold text-blue-600 dark:text-blue-400">{project.metrics.extraMetric.value}</p>
-                        <p className="text-[10px] text-gray-500 dark:text-gray-400">Processed</p>
+
+                    {/* Live Usage Stat Blocks */}
+                    {project.metrics && (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5 p-3 rounded-xl bg-zinc-50/70 dark:bg-zinc-950/50 border border-zinc-200/80 dark:border-zinc-800/70">
+                        <div>
+                          <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 font-medium">Usage</p>
+                          <p className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white">{project.metrics.activeUsers}</p>
+                          <p className="text-[10px] sm:text-[11px] text-zinc-500 dark:text-zinc-400 truncate">{project.metrics.usersLabel}</p>
+                        </div>
+                        {project.metrics.extraMetric && (
+                          <div>
+                            <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 font-medium">{project.metrics.extraMetric.label}</p>
+                            <p className="text-sm sm:text-base font-bold text-blue-600 dark:text-blue-400">{project.metrics.extraMetric.value}</p>
+                            <p className="text-[10px] sm:text-[11px] text-zinc-500 dark:text-zinc-400">Processed</p>
+                          </div>
+                        )}
+                        <div className="col-span-2 sm:col-span-1 pt-1.5 sm:pt-0 border-t sm:border-t-0 border-zinc-200/60 dark:border-zinc-800/60">
+                          <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 font-medium">Health Status</p>
+                          <p className="text-sm sm:text-base font-bold text-emerald-600 dark:text-emerald-400">{project.metrics.uptimeOrStatus}</p>
+                          <p className="text-[10px] sm:text-[11px] text-zinc-500 dark:text-zinc-400">Live SLA</p>
+                        </div>
                       </div>
                     )}
-                    <div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Health Status</p>
-                      <p className="text-base font-bold text-emerald-600 dark:text-emerald-400">{project.metrics.uptimeOrStatus}</p>
-                      <p className="text-[10px] text-gray-500 dark:text-gray-400">Live SLA</p>
+
+                    {/* Architecture Callout */}
+                    <div className="p-3 sm:p-3.5 rounded-xl border border-blue-200/70 dark:border-blue-900/40 bg-blue-50/60 dark:bg-blue-950/20 text-xs space-y-1">
+                      <div className="flex items-center gap-1.5 text-blue-700 dark:text-blue-300 font-semibold">
+                        <Lightbulb className="size-3.5 shrink-0" />
+                        <span>Engineering Architecture</span>
+                      </div>
+                      <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal text-[11px] sm:text-xs">
+                        {project.technicalInsight.summary}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-medium bg-zinc-100 dark:bg-zinc-800/70 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-zinc-700/60"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                )}
 
-                {/* Extra Knowledge Architecture Callout */}
-                <div className="p-3.5 rounded-xl border border-blue-100 dark:border-blue-900/40 bg-blue-50/50 dark:bg-blue-950/20 text-xs space-y-1">
-                  <div className="flex items-center gap-1.5 text-blue-700 dark:text-blue-300 font-semibold">
-                    <Lightbulb className="size-3.5" />
-                    <span>Engineering Architecture</span>
+                  <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 mt-4 flex items-center justify-between gap-3">
+                    <Button as={Link} href={project.links.live || "/work"} color="blue" size="sm" pill className="flex-1 font-medium shadow-xs justify-center">
+                      Launch App <ArrowRight className="ml-2 size-3.5" />
+                    </Button>
+                    {project.links.github && (
+                      <Button as="a" href={project.links.github} target="_blank" color="gray" size="sm" pill className="shrink-0" aria-label="GitHub Repository">
+                        <GithubIcon className="size-4" />
+                      </Button>
+                    )}
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-normal">
-                    {project.technicalInsight.summary}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag} color="gray" size="xs">
-                      {tag}
-                    </Badge>
-                  ))}
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
 
-              <div className="pt-4 border-t border-gray-100 dark:border-gray-800 mt-4 flex items-center justify-between gap-3">
-                <Button as={Link} href={project.links.live || "/work"} color="blue" size="sm" pill className="flex-1 font-medium">
-                  Launch App <ArrowRight className="ml-2 size-3.5" />
-                </Button>
-                {project.links.github && (
-                  <Button as="a" href={project.links.github} target="_blank" color="gray" size="sm" pill>
-                    <GithubIcon className="size-4" />
-                  </Button>
-                )}
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
+        {/* 6. Active In-Progress Builds (Major & Minor) */}
+        <section className="max-w-5xl mx-auto space-y-8 w-full">
+          <div className="space-y-2">
+            <Badge color="warning" className="w-fit">
+              Active Roadmap &amp; Labs
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+              Ongoing Builds &amp; Experimental Labs
+            </h2>
+            <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+              Major distributed systems in active development alongside developer utilities and open-source packages.
+            </p>
+          </div>
 
-      {/* 4. Active In-Progress Builds (Major & Minor) */}
-      <section className="space-y-6 pt-4">
-        <div className="space-y-1">
-          {/*<Badge color="warning" className="rounded-full px-3 py-0.5">
-            Active Roadmap
-          </Badge>*/}
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-            Ongoing Builds & Experimental Labs
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base max-w-2xl">
-            Major systems currently in development alongside minor developer utilities and open-source experiments.
-          </p>
-        </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {ongoingProjects.map((project) => (
+              <div
+                key={project.id}
+                className="rounded-2xl border border-zinc-200/80 bg-white/90 dark:border-zinc-800/80 dark:bg-zinc-900/50 shadow-xs hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5 transition-all duration-300 p-4 sm:p-5 flex flex-col justify-between space-y-4"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold ${
+                        project.tier === "major-in-progress"
+                          ? "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200/80 dark:border-amber-900/60"
+                          : "bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200/80 dark:border-purple-900/60"
+                      }`}
+                    >
+                      {project.tier === "major-in-progress" ? "Major System" : "Minor / Tool"}
+                    </span>
+                    <span className="text-[11px] sm:text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+                      {project.status}
+                    </span>
+                  </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {ongoingProjects.map((project) => (
-            <Card key={project.id} className="hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <Badge
-                    color={project.tier === "major-in-progress" ? "warning" : "purple"}
-                    size="xs"
-                    className="rounded-full"
-                  >
-                    {project.tier === "major-in-progress" ? "Major System" : "Minor / Tool"}
-                  </Badge>
-                  <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
-                    {project.status}
+                  <div>
+                    <h4 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white">{project.title}</h4>
+                    <p className="text-xs font-medium text-amber-600 dark:text-amber-400 mt-0.5">{project.tagline}</p>
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-2 line-clamp-2 leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {/* Progress bar if present */}
+                  {project.progressPercent && (
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
+                        <span>Build Completion</span>
+                        <span>{project.progressPercent}%</span>
+                      </div>
+                      <Progress progress={project.progressPercent} color="blue" size="sm" />
+                    </div>
+                  )}
+
+                  {/* Architecture Takeaway */}
+                  <div className="p-2.5 rounded-xl bg-zinc-50/70 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-700/60 text-[11px] space-y-0.5">
+                    <span className="font-semibold text-zinc-900 dark:text-white">Insight: </span>
+                    <span className="text-zinc-600 dark:text-zinc-300">{project.technicalInsight.headline}</span>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/80 mt-3 flex items-center justify-between gap-2">
+                  <span className="text-[11px] sm:text-xs font-medium text-zinc-500 dark:text-zinc-400 truncate">
+                    {project.metrics?.extraMetric?.label || "Status"}:{" "}
+                    <strong className="text-zinc-900 dark:text-white font-semibold">
+                      {project.metrics?.extraMetric?.value || project.metrics?.uptimeOrStatus}
+                    </strong>
                   </span>
-                </div>
-
-                <div>
-                  <h4 className="text-lg font-bold text-gray-900 dark:text-white">{project.title}</h4>
-                  <p className="text-xs font-medium text-amber-600 dark:text-amber-400 mt-0.5">{project.tagline}</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 line-clamp-2 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-
-                {/* Progress bar if present */}
-                {project.progressPercent && (
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-[11px] font-medium text-gray-600 dark:text-gray-400">
-                      <span>Build Completion</span>
-                      <span>{project.progressPercent}%</span>
-                    </div>
-                    <Progress progress={project.progressPercent} color="blue" size="sm" />
-                  </div>
-                )}
-
-                {/* Architecture Takeaway */}
-                <div className="p-2.5 rounded-lg bg-gray-50 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700/60 text-[11px] space-y-0.5">
-                  <span className="font-semibold text-gray-900 dark:text-white">Insight: </span>
-                  <span className="text-gray-600 dark:text-gray-300">{project.technicalInsight.headline}</span>
+                  {project.links.github && (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs text-blue-600 dark:text-blue-400 font-semibold hover:underline inline-flex items-center gap-1 shrink-0"
+                    >
+                      Code <ExternalLink className="size-3" />
+                    </a>
+                  )}
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
 
-              <div className="pt-3 border-t border-gray-100 dark:border-gray-800 mt-3 flex items-center justify-between">
-                <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                  {project.metrics?.extraMetric?.label || "Status"}:{" "}
-                  <strong className="text-gray-900 dark:text-white">
-                    {project.metrics?.extraMetric?.value || project.metrics?.uptimeOrStatus}
-                  </strong>
-                </span>
-                {project.links.github && (
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs text-blue-600 dark:text-blue-400 font-semibold hover:underline inline-flex items-center gap-1"
-                  >
-                    Code <ExternalLink className="size-3" />
-                  </a>
-                )}
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-      {/* 6. Call to Action Banner */}
-      <section className="rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 p-8 sm:p-14 text-center text-white space-y-6 shadow-xl">
-        <div className="space-y-3 max-w-2xl mx-auto">
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
-            Have a project or high-scale system in mind?
-          </h2>
-          <p className="text-blue-100 text-base sm:text-lg leading-relaxed">
-            Whether you need a full-stack platform built, an existing service refactored for scale, or a Docker CI/CD deployment—I&apos;m ready to collaborate.
-          </p>
-        </div>
+        {/* 7. Bottom Call-to-Action Card (Matches About Page) */}
+        <section className="max-w-4xl mx-auto w-full">
+          <div className="p-6 sm:p-10 rounded-3xl border border-zinc-200/80 bg-white/90 dark:border-zinc-800/80 dark:bg-zinc-900/60 shadow-sm text-center space-y-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
+              Have a project or high-scale system in mind?
+            </h2>
+            <p className="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto leading-relaxed text-sm sm:text-base">
+              Whether you need a full-stack platform built, an existing service refactored for scale, or a Docker CI/CD deployment—I&apos;m ready to collaborate.
+            </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-          <Button as={Link} href="/contact" color="light" size="lg" pill className="font-semibold text-gray-900 shadow-md">
-            Start a Conversation <Sparkles className="ml-2 size-4 text-amber-500" />
-          </Button>
-          <Button as={Link} href="/work" color="dark" size="lg" pill className="font-semibold border-white/20">
-            Explore All Projects & Architecture <ArrowRight className="ml-2 size-4" />
-          </Button>
-        </div>
-      </section>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
+              <Button as={Link} href="/contact" color="blue" pill size="lg" className="font-medium shadow-sm justify-center">
+                Start a Conversation <Sparkles className="ml-2 size-4 text-amber-300" />
+              </Button>
+              <Button as={Link} href="/work" color="gray" pill size="lg" className="font-medium justify-center">
+                Explore All Projects &amp; Architecture <ArrowRight className="ml-2 size-4" />
+              </Button>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

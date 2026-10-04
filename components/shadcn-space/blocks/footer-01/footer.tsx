@@ -21,7 +21,6 @@ const LinkedinIcon = () => (
   </svg>
 );
 
-
 type FooterData = {
   title: string;
   links: {
@@ -35,16 +34,20 @@ const footerSections: FooterData[] = [
     title: "Sitemap",
     links: [
       {
-        title: "Contact us",
-        href: "/contact",
+        title: "Home",
+        href: "/",
       },
       {
-        title: "About us",
+        title: "About",
         href: "/about",
       },
       {
         title: "Work",
         href: "/work",
+      },
+      {
+        title: "Contact",
+        href: "/contact",
       },
     ],
   },
@@ -52,7 +55,7 @@ const footerSections: FooterData[] = [
 
 const Footer = () => {
   return (
-    <footer className="py-10">
+    <footer className="py-10 border-t border-zinc-200/80 dark:border-zinc-850">
       <div className="max-w-7xl xl:px-16 lg:px-8 px-4 mx-auto">
         <div className="flex flex-col gap-6 sm:gap-12">
           <div className="py-12 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 lg:grid-cols-12 gap-x-8 gap-y-10 px-6 xl:px-0">
@@ -61,27 +64,33 @@ const Footer = () => {
                 {/* Logo */}
                 <Link href="/" className="w-fit">
                   <div className="flex items-center justify-center gap-2">
-                  <Logo />
-                    <h2 className="font-semibold">Build Vault</h2>
+                    <Logo />
+                    <h2 className="font-semibold text-zinc-900 dark:text-white">Build Vault</h2>
                   </div>
                 </Link>
 
                 <p className="text-base font-normal text-muted-foreground">
-                  A collection of all my software Products. Let's create
+                  A collection of all my software Products. Let&apos;s create
                   something amazing together.
                 </p>
 
                 {/* social links */}
                 <div className="flex items-center gap-8">
                   <a
-                    href="#"
+                    href="https://twitter.com"
+                    target="_blank"
+                    rel="noreferrer"
                     className="text-muted-foreground hover:text-foreground"
+                    aria-label="Twitter / X"
                   >
                     <TwitterIcon />
                   </a>
                   <a
-                    href="#"
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noreferrer"
                     className="text-muted-foreground hover:text-foreground"
+                    aria-label="LinkedIn"
                   >
                     <LinkedinIcon />
                   </a>
@@ -100,12 +109,12 @@ const Footer = () => {
                   <ul className="flex flex-col gap-3">
                     {links.map(({ title, href }) => (
                       <li key={title}>
-                        <a
+                        <Link
                           href={href}
                           className="text-base font-normal text-muted-foreground hover:text-foreground"
                         >
                           {title}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -116,7 +125,7 @@ const Footer = () => {
           </div>
           <Separator orientation="horizontal" />
           <p className="text-sm font-normal text-muted-foreground text-center animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-100 ease-in-out fill-mode-both">
-            © 2026 Prakul Tripathi. All Rights Reserved
+            &copy; 2026 Prakul Tripathi. All Rights Reserved
           </p>
         </div>
       </div>
